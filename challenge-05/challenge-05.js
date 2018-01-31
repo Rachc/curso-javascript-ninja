@@ -14,7 +14,7 @@ var arrayParam = function(variavelQualquer){
 /*
 Imprima o segundo índice do array retornado pela função criada acima.
 */
-// ?
+arrayParam(variavelQualquer)[1]
 
 /*
 Crie uma função que receba dois parâmetros: o primeiro, um array de valores; e o
@@ -22,18 +22,24 @@ segundo, um número. A função deve retornar um índice do array que foi passad
 no primeiro parâmetro. O índice a ser retornado, deve ser o número passado no
 segundo parâmetro.
 */
-// ?
+function arrayIndex(arr, indexArr){
+  return arr[indexArr]
+}
 
 /*
 Declare uma variável que recebe um array com 5 valores, de tipos diferentes.
 */
-// ?
+var differentKindArray = [1, "Rachel", [1,2,3], { propriedade: "Valor" }, true]
 
 /*
 Invoque a função criada acima, fazendo-a retornar todos os valores do último
 array criado.
 */
-// ?
+arrayIndex(differentKindArray, 0)
+arrayIndex(differentKindArray, 1)
+arrayIndex(differentKindArray, 2)
+arrayIndex(differentKindArray, 3)
+arrayIndex(differentKindArray, 4)
 
 /*
 Crie uma função chamada `book`, que recebe um parâmetro, que será o nome do
@@ -49,7 +55,32 @@ propriedades:
 - Se o parâmetro não for passado, a função deve retornar o objeto com todos
 os livros.
 */
-// ?
+var book = function(bookName){
+  var library = {
+    orgulhoEPreconceito: {
+      quantidadePaginas: 279,
+      autor: "Jane Austen",
+      editora: "L&PM Pocket"
+    },
+    aMaoEsquerdaDaEscuridao: {
+      quantidadePaginas: 304,
+      autor: "Ursula K. Le Guin",
+      editora: "Aleph"
+    },
+    ubik: {
+      quantidadePaginas: 288,
+      autor: "Philip K. Dick",
+      editora: "Aleph"
+    }
+  }
+  console.log("todos os livros", bookName)
+  console.log("todos os livros", library)
+  console.log("library.orgulhoEPreconceito", library.orgulhoEPreconceito)
+  console.log("library.bookName", library.bookName)
+
+  return library.bookName ? library.bookName : library
+}
+
 
 /*
 Usando a função criada acima, imprima o objeto com todos os livros.
