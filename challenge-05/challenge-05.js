@@ -73,37 +73,33 @@ var book = function(bookName){
       editora: "Aleph"
     }
   }
-  console.log("todos os livros", bookName)
-  console.log("todos os livros", library)
-  console.log("library.orgulhoEPreconceito", library.orgulhoEPreconceito)
-  console.log("library.bookName", library.bookName)
 
-  return library.bookName ? library.bookName : library
+  return bookName ? library[bookName] : library
 }
 
 
 /*
 Usando a função criada acima, imprima o objeto com todos os livros.
 */
-// ?
+book();
 
 /*
 Ainda com a função acima, imprima a quantidade de páginas de um livro qualquer,
 usando a frase:
 "O livro [NOME_DO_LIVRO] tem [X] páginas!"
 */
-// ?
+console.log("O livro Ubik tem " + book('ubik').quantidadePaginas + " páginas!")
 
 /*
 Ainda com a função acima, imprima o nome do autor de um livro qualquer, usando
 a frase:
 "O autor do livro [NOME_DO_LIVRO] é [AUTOR]."
 */
-// ?
+console.log("O autor do livro Ubik é " + book('ubik').autor + ".")
 
 /*
 Ainda com a função acima, imprima o nome da editora de um livro qualquer, usando
 a frase:
 "O livro [NOME_DO_LIVRO] foi publicado pela editora [NOME_DA_EDITORA]."
 */
-// ?
+console.log("O livro Ubik foi publicado pela editora " + book('ubik').editora + ".")
