@@ -2,7 +2,7 @@
 Crie uma variável qualquer, que receba um array com alguns valores aleatórios
 - ao menos 5 - (fica por sua conta os valores do array).
 */
-var variavelQualquer = [ 1, false, 'Rachel', "30", null]
+var variavelQualquer = [ 1, false, 'Rachel', '30', null]
 
 /*
 Crie uma função que receba um array como parâmetro, e retorne esse array.
@@ -57,7 +57,7 @@ os livros.
 */
 var book = function(bookName){
   var library = {
-    orgulhoEPreconceito: {
+    orgulhoEPreconceito: { //eu poderia ter usado uma string "Orgulho e Preconceito"
       quantidadePaginas: 279,
       autor: "Jane Austen",
       editora: "L&PM Pocket"
@@ -89,6 +89,10 @@ usando a frase:
 "O livro [NOME_DO_LIVRO] tem [X] páginas!"
 */
 console.log("O livro Ubik tem " + book('ubik').quantidadePaginas + " páginas!")
+/*
+var bookname = Ubik
+console.log("O livro " + bookname + " tem " + book(bookname).quantidadedePaginas + " páginas!")
+*/
 
 /*
 Ainda com a função acima, imprima o nome do autor de um livro qualquer, usando
