@@ -56,6 +56,15 @@ var showTeamPosition = function (position) {
 }
 
 /*
+function showTeamPosition( position ){
+  if (position < 1 || position > 5){
+    console.log("Não temos a informação do time que está nessa posição")
+  }
+  return "O time que está na " + position + " é " + teams[position - 1]
+}
+*/
+
+/*
 Escolha 4 times do campeonato selecionado e mostre a posição dele, usando a
 função acima. Entre esses 4, adicione 1 que não esteja entre os 5 primeiros.
 */
@@ -90,7 +99,7 @@ var convertToHex = function(colorName){
   switch(colorName){
     case 'red':
       console.log('O hexadecimal para a cor ' + colorName + ' é #b51901')
-    break;
+    break; //se usarmos o return antes do console log, não precisariamos do break
     case 'orange':
       console.log('O hexadecimal para a cor ' + colorName + ' é #d67915')
     break;
@@ -108,6 +117,32 @@ var convertToHex = function(colorName){
     break;
   }
 }
+
+
+// var convertToHex = function(colorName){
+//   var hexa
+//   switch(colorName){
+//     case 'red':
+//       hexa = '#b51901';
+//     break;
+//     case 'orange':
+//       hexa = '#d67915';
+//     break;
+//     case 'green':
+//       hexa = '#227516';
+//     break;
+//     case 'blue':
+//       hexa = '#27c694';
+//     break;
+//     case 'purple':
+//       hexa = '#6e2499';
+//     break;
+//     default:
+//       console.log("Não temos o equivalente hexadecimal para " + colorName + ".")
+//     break;
+//   }
+//   console.log('O hexadecimal para a cor ' + colorName + ' é ' + hexa)
+// } 
 
 /*
 Tente mostrar o hexadecimal de 8 cores diferentes usando a função criada acima.
