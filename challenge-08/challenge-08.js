@@ -12,7 +12,9 @@ Invoque a função criada acima, passando dois números que serão somados, e mo
 o resultado no console, com a frase:
 "A soma de [VALOR 1] e [VALOR2] é igual a [RESULTADO]."
 */
-console.log("A Soma de 2 e 3 é igual a " + sum(2,3) + ".");
+var value1 = 2;
+var value2 = 3
+console.log("A Soma de " + value1 + " e " + value2 + " é igual a " + sum(value1,value2) + ".");
 
 /*
 Mostre no console o nome da função criada acima, com a frase:
@@ -54,44 +56,29 @@ vai efetuar. Será uma string com os valores `+`, `-`, `*`, `/` ou `%`;
   "Operação inválida."
 */
 function calculator(signal){
-  switch(signal){
-    case '+':
-      return function sum(a,b){
-        result = a + b;
-        console.log("resultado da operação: " + a + " " + signal + " " + b + " = " + result)
-        return a + b;
-      }
-    break;
-    case '-':
-      return function sum(a,b){
-        result = a - b;
-        console.log("resultado da operação: " + a + " " + signal + " " + b + " = " + result)
-        return a - b;
-      }
-    break;
-    case '*':
-      return function sum(a,b){
-        result = a * b;
-        console.log("resultado da operação: " + a + " " + signal + " " + b + " = " + result)
-        return a * b;
-      }
-    break;
-    case '/':
-      return function sum(a,b){
-        result = a / b;
-        console.log("resultado da operação: " + a + " " + signal + " " + b + " = " + result)
-        return a / b;
-      }
-    break;
-    case '%':
-      return function sum(a,b){
-        result = a % b;
-        console.log("resultado da operação: " + a + " " + signal + " " + b + " = " + result)
-        return a % b;
-      }
-    break;
-    default:
-      return console.log("operação invalida")
+  return function (num1, num2){
+    var result;
+    
+    switch(signal){
+      case '+':
+        result = num1 + num2;
+      break;
+      case '-':
+        result = num1 - num2;
+      break;
+      case '*':
+        result = num1 * num2;
+      break;
+      case '/':
+        result = num1 / num2;
+      break;
+      case '%':
+        result = num1 % num2;
+      break;
+      default:
+        return console.log("operação invalida")
+    }
+    return console.log("Resultado da operação: " + num1 + " " + signal + " " + num2 + " = " + result)
   }
 }
 
