@@ -27,7 +27,7 @@
     var number2 = 20;
     var sum = function sum() {
       return number1 + number2;
-    };
+    }
     console.log( 'A soma de 10 e 20 é igual a', sum ? sum() : undefined );
     return sum();
   }
@@ -64,17 +64,17 @@
   por parâmetro, INVOCADA, e passando a ela por parâmetro os dois valores
   que foram passadas para a primeira função `calculator`.
   */
-  function calculator(num1, num2){
-    return function(callback){
-      return callback(num1, num2);
-    }
+  function calculator( num1, num2 ){
+    return function( callback ){
+      return callback( num1, num2 );
+    };
   }
 
   /*
   Declare uma variável chamada `sum`, e atribua a ela a função `calculator`,
   passando dois números por parâmetro.
   */
-  var sum  = calculator(10,2);
+  var sum  = calculator( 10, 2 );
 
   /*
   Sabemos que `sum` agora tem uma função atribuída a ela, que é o retorno de
@@ -86,8 +86,8 @@
   anônima tem como seus argumentos.
   */
   console.log( 'O resultado da soma é:',
-    sum(function(num1, num2){
-      return num1 + num2
+    sum(function( num1, num2 ){
+      return num1 + num2;
     })
   );
   
@@ -97,10 +97,10 @@
   `division` e `mod`, e atribua à elas `calculator`, passando números
   diferentes para cada chamada.
   */
- var subtraction  = calculator(10,2);
- var multiplication  = calculator(8,4);
- var division  = calculator(9,2);
- var mod  = calculator(48,32);
+ var subtraction  = calculator( 10, 2 );
+ var multiplication  = calculator( 8, 4 );
+ var division  = calculator( 9, 2 );
+ var mod  = calculator( 48, 32 );
 
   /*
   Mostre as variáveis acima no `console` (uma chamada de console por variável),
@@ -110,28 +110,28 @@
   chamada.
   */
   console.log( 'O resultado da subtração é:',
-    subtraction(function(num1, num2){
+    subtraction(function( num1, num2 ){
       return num1 - num2;
     })
   );
 
   console.log( 'O resultado da multiplicação é:', 
-    multiplication(function(num1, num2){
+    multiplication(function( num1, num2 ){
       return num1 * num2;
     })
   );
 
   console.log( 'O resultado da divisão é:',
-    division(function(num1, num2){
+    division(function( num1, num2 ){
       return num1 / num2;
     })
   );
   // ?
 
   console.log( 'O resto da divisão é:',
-    mod(function(num1, num2){
+    mod(function( num1, num2 ){
       return num1 % num2;
     })
   );
   // ?
-})()
+})();
