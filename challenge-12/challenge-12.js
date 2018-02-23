@@ -80,7 +80,13 @@ Mostre no console todas as propriedades e valores de todos os livros,
 no formato abaixo:
     "[PROPRIEDADE]: [VALOR]"
 */
-console.log(objectBooks)
+for( var i = 0; i <= books.length; i++){
+  console.log("\n")
+  for(prop in books[i]){
+    console.log(prop + " : " + books[i][prop])
+  }
+}
+
 
 /*
 Crie um array chamado `myName`. Cada item desse array deve ser uma letra do
@@ -99,7 +105,7 @@ console.log( '\nMeu nome invertido é:' );
 /*
 Ainda usando o objeto acima, mostre no console seu nome invertido.
 */
-console.log(myName.reverse())
+console.log(myName.reverse().join(""))
 
 console.log( '\nAgora em ordem alfabética:' );
 /*
