@@ -18,7 +18,7 @@
   console.log( 'As letras do seu nome:' );
   var name = "Rachel"
   for(var i = 0; i < name.length; i++){
-    console.log(name[i] + " é a " + (name.indexOf(name[i])+1) + " ª letra do meu nome")
+    console.log(name[i] + " é a " + (i + 1) + " ª letra do meu nome")
   }
 
   /*
@@ -35,21 +35,24 @@
   */
   console.log( '\nNome convertido à partir de um slug:' );
   var fullName = 'rachel-curioso'
-  var firstUpperCase = function(slugName) {
-    var hyphenLocation = slugName.indexOf('-')
-    var firstLetter = slugName.charAt(0).toUpperCase()
-    var firstPart = slugName.slice(1, hyphenLocation)
-    var hypnen = slugName.charAt(hyphenLocation)
-    var secondLetter = slugName.charAt(hyphenLocation + 1).toUpperCase()
-    var lastPart = slugName.slice(hyphenLocation + 2)
+  // var firstUpperCase = function(slugName) {
+  //   var hyphenLocation = slugName.indexOf('-')
+  //   var firstLetter = slugName.charAt(0).toUpperCase()
+  //   var firstPart = slugName.slice(1, hyphenLocation)
+  //   var hypnen = slugName.charAt(hyphenLocation)
+  //   var secondLetter = slugName.charAt(hyphenLocation + 1).toUpperCase()
+  //   var lastPart = slugName.slice(hyphenLocation + 2)
 
-    var kebabName = firstLetter.concat(firstPart, hypnen, secondLetter, lastPart)
+  //   var kebabName = firstLetter.concat(firstPart, hypnen, secondLetter, lastPart)
 
-    return kebabName
-  }
+  //   return kebabName
+  // }
+  // console.log(firstUpperCase(newFullName))
 
-  console.log(firstUpperCase(fullName))
-
+  var newFullName = fullName.split('-').map(function(name){
+    return name[0].toUpperCase() + name.slice(1)
+  }).join('-')
+  console.log(newFullName)
 
     /*
     - Crie um array com 5 nomes. Reduza esses nomes a uma única string, separando
@@ -62,9 +65,16 @@
     */
   console.log( '\nMeus amigos:' );
   var myFriends = ['Alvaro', 'Stella', 'Stefannie', 'Philip', 'Leandro']
-  myFriends.splice(-1,0,"e")
-  var friendsPhrase = myFriends.join(" ")
-  console.log(friendsPhrase.concat(' são meus amigos'))
+  // myFriends.splice(-1,0,"e")
+  // var friendsPhrase = myFriends.join(" ")
+  // console.log(friendsPhrase.concat(' são meus amigos'))
+
+  var phrase = myFriends.reduce(function(acumulado, atual, index){
+    var separador = myFriends.length - 1 === index ? " e " : ", "
+    return acumulado + separador + atual
+  }).concat(' são meus amigos')
+
+  console.log(phrase)
 
   /*
   Usando o replace(), faça a string "Roberto" virar "Roberta".
