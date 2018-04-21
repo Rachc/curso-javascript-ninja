@@ -1,8 +1,18 @@
+(function(){
+  'use strict'
   /*
   Crie dois objetos, que serão duas pessoas. Cada um deve ter as propriedades
   `name` e `lastName`, preenchidos com o nome e sobrenome da pessoa.
   */
-  // ?
+  var rachel = {
+    name: 'Rachel',
+    lastName: 'Curioso'
+  }
+
+  var alvaro = {
+    name: 'Alvaro',
+    lastName: 'Wang'
+  }
 
   /*
   Agora crie uma função chamada `getFullName` que retorne as propriedades
@@ -16,7 +26,14 @@
   contexto da função. Use um console.log por pessoa.
   */
   console.log( 'O nome das pessoas é:' );
-  // ?
+  function getFullName(){
+    console.log(this.name + ' ' + this.lastName)
+  }
+  var pessoas = [rachel, alvaro]
+
+  pessoas.forEach(function(element){
+    getFullName.call(element)
+  });
 
   /*
   Crie uma função chamada `sum`. Essa função pode receber uma lista de
@@ -68,3 +85,4 @@
   */
   console.log( '\nSomar números entrados pelo usuário:' );
   // ?
+})()
