@@ -29,31 +29,49 @@
   //Pegar todos os elementos do dom
   var values = doc.querySelector('[data-js="values"]');
 
-  var num1 = doc.querySelector('[data-js="num1"]');
-  var num2 = doc.querySelector('[data-js="num2"]');
-  var num3 = doc.querySelector('[data-js="num3"]');
-  var num4 = doc.querySelector('[data-js="num4"]');
-  var num5 = doc.querySelector('[data-js="num5"]');
-  var num6 = doc.querySelector('[data-js="num6"]');
-  var num7 = doc.querySelector('[data-js="num7"]');
-  var num8 = doc.querySelector('[data-js="num8"]');
-  var num9 = doc.querySelector('[data-js="num9"]');
-  var num0 = doc.querySelector('[data-js="num0"]');
-
-  var sum = doc.querySelector('[data-js="sum"]');
-  var sub = doc.querySelector('[data-js="sub"]');
-  var mult = doc.querySelector('[data-js="mult"]');
-  var division = doc.querySelector('[data-js="division"]');
+  var opAndNumbers = doc.querySelectorAll('[data-js="opAndNumbers"]');
 
   var result = doc.querySelector('[data-js="result"]');
   var clear = doc.querySelector('[data-js="clear"]');
 
-  //Atribuir valores pros botões
   //on click, concatenar o valor dos botões
+  opAndNumbers.forEach(function(item){
+    item.addEventListener('click', function(e){
+      e.preventDefault()
+      printNumber(item)
+    }, false)
+  })
+
+  //Função de adicionar numero no input. Verificar se o input é = 0 (valor inicial). Se sim, limpar o 0
+  function printNumber(item){
+    values.value === '0' ? values.value = item.value : values.value += item.value
+  }
+
+  //Limpar
+  function clean(){
+    values.value = 0
+  }
+
+  clear.addEventListener('click', function(e){
+    e.preventDefault()
+    clean()
+  }, false)
+
+  result.addEventListener('click', function(e){
+    e.preventDefault()
+    handleEquals()
+  })
+
+  function handleEquals(){
+    var inputArray = values.value.match(/(?:\d+)[+x÷-]?/g)
+    console.log('teste', values.value)
+    console.log(inputArray)
+
+    var calculationResult
+  }
   //Ao apertar o botão de igual, fazer a função de calcular
     //A função deve agrupar o valor do input, usando regex, em numeros e sinais.
     //Usando reduce, a expressão vai comparar se o valor atual é sinal.
-    //Caso seja sinal, ele deve fazer a operação, usando como parametro o acumulado e o próximo item(como pegar esse valor)
-
+    //Caso seja sinal, ele deve fazer a operação, usando como parametro o acumulado e o próximo item(como pegar esse valor? usando indice de array?)
 
 })(window, document)
