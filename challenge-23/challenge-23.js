@@ -64,10 +64,11 @@
 
   function handleEquals(){
     var inputArray = values.value.match(/(?:\d+)[+x÷-]?/g)
-    console.log('teste', values.value)
     console.log(inputArray)
 
-    var calculationResult
+    var calculationResult = inputArray.reduce(function(acc, actual){
+
+    })
   }
   //Ao apertar o botão de igual, fazer a função de calcular
     //A função deve agrupar o valor do input, usando regex, em numeros e sinais.
