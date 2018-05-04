@@ -63,16 +63,45 @@
   })
 
   function handleEquals(){
-    var inputArray = values.value.match(/(?:\d+)[+x÷-]?/g)
-    console.log(inputArray)
+    var inputArray = values.value.match(/(?:\d+)[+-x÷]?/g)
 
-    var calculationResult = inputArray.reduce(function(acc, actual){
+    var calculationResult = inputArray.reduce(function( acc , actual){
+
+      var firstNumber = acc.replace(/\D/, '')
+      var secondNumber = actual.replace(/\D/, '')
+      var operation = acc.slice(-1)
+      console.log(operation)
+      var calc;
+
+      if (operation === '+') {
+        calc = +firstNumber + +secondNumber;
+      }
+
+      if (operation === '-') {
+        calc = +firstNumber - +secondNumber;
+      }
+
+      if (operation === 'x') {
+        calc = +firstNumber * +secondNumber;
+      }
+
+      if(operation === '÷'){
+        calc = +firstNumber / +secondNumber;
+      }
+
+      var lastOperation = actual.slice(-1);
+
+      return isOperation(lastOperation) ?
+        calc + lastOperation :
+        calc.toString();
 
     })
+
+    values.value = calculationResult;
   }
-  //Ao apertar o botão de igual, fazer a função de calcular
-    //A função deve agrupar o valor do input, usando regex, em numeros e sinais.
-    //Usando reduce, a expressão vai comparar se o valor atual é sinal.
-    //Caso seja sinal, ele deve fazer a operação, usando como parametro o acumulado e o próximo item(como pegar esse valor? usando indice de array?)
+
+  function isOperation(char) {
+    return char === '+' || char === '-' || char === 'x' || char === '÷';
+  }
 
 })(window, document)
