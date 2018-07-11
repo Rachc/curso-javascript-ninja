@@ -1,5 +1,5 @@
 (function(win, doc){
-  'use strict';
+  'use strict'
   /*
   Vamos desenvolver mais um projeto. A ideia é fazer uma mini-calculadora.
   As regras são:
@@ -26,82 +26,73 @@
   - Ao pressionar o botão "CE", o input deve ficar zerado.
   */
 
-  //Pegar todos os elementos do dom
-  var values = doc.querySelector('[data-js="values"]');
+  var $display = doc.querySelector('[data-js="values"]')
+  var $calcBtn = doc.querySelectorAll('[data-js="opAndNumbers"]')
+  var $clearBtn = doc.querySelector('[data-js="clear"]')
+  var $equalBtn = doc.querySelector('[data-js="result"]')
 
-  var opAndNumbers = doc.querySelectorAll('[data-js="opAndNumbers"]');
+  var operationsArr = ['+', '-', 'x', '÷']
+  var lastCharRegex = new RegExp('\\D$')
 
-  var result = doc.querySelector('[data-js="result"]');
-  var clear = doc.querySelector('[data-js="clear"]');
-
-  //on click, concatenar o valor dos botões
-  opAndNumbers.forEach(function(item){
+  $calcBtn.forEach(function(item){
     item.addEventListener('click', function(e){
-      e.preventDefault()
-      printNumber(item)
+      e.preventDefault
+      printItem(item)
     }, false)
   })
 
-  //Função de adicionar numero no input. Verificar se o input é = 0 (valor inicial). Se sim, limpar o 0
-  function printNumber(item){
-    values.value === '0' ? values.value = item.value : values.value += item.value
-  }
+  $clearBtn.addEventListener('click', function(e){
+    e.preventDefault
+    clear($display)
+  },false)
 
-  //Limpar
-  function clean(){
-    values.value = 0
-  }
-
-  clear.addEventListener('click', function(e){
-    e.preventDefault()
-    clean()
+  $equalBtn.addEventListener('click', function(e){
+    handleResult($display.value)
   }, false)
 
-  result.addEventListener('click', function(e){
-    e.preventDefault()
-    handleEquals()
-  })
+  function printItem(item){
+    if (isLastItemOP($display.value) && (operationsArr.indexOf(item.value) !== -1))
+      return $display.value = $display.value.slice(0,-1) + item.value
 
-  function handleEquals(){
-    var inputArray = values.value.match(/(?:\d+)[+-x÷]?/g)
+    return $display.value === '0' ? $display.value = item.value : $display.value += item.value
+  }
 
-    var calculationResult = inputArray.reduce(function( acc , actual){
+  function isLastItemOP(values){
+    return lastCharRegex.test(values)
+  }
 
-      var firstNumber = acc.replace(/\D/, '')
-      var secondNumber = actual.replace(/\D/, '')
-      var operation = acc.slice(-1)
-      console.log(operation)
-      var calc;
+  function clear($display){
+    $display.value = 0
+  }
 
-      if (operation === '+') {
-        calc = +firstNumber + +secondNumber;
+  function handleResult(values){
+    lastCharRegex.test(values) ? values = values.slice(0,-1) : ''
+
+    values = values.match(/(?:\d+)[+x÷-]?/g);
+
+    var result = values.reduce(function(acumulado, atual){
+      var op = lastCharRegex.test(acumulado) ? acumulado.split('').pop() : ''
+      var nextOp = lastCharRegex.test(atual) ? atual.split('').pop() : ''
+      var value1 = lastCharRegex.test(acumulado) ? acumulado.slice(0,-1) : acumulado
+      var value2 = lastCharRegex.test(atual) ? atual.slice(0,-1) : atual
+
+      switch (op) {
+        case '+':
+          return (Number(value1) + Number(value2)) + nextOp;
+        case '-':
+          return  (Number(value1) - Number(value2)) + nextOp;
+        case 'x':
+          return (Number(value1) * Number(value2)) + nextOp;
+        case '÷':
+          return (Number(value1) / Number(value2)) + nextOp;
       }
-
-      if (operation === '-') {
-        calc = +firstNumber - +secondNumber;
-      }
-
-      if (operation === 'x') {
-        calc = +firstNumber * +secondNumber;
-      }
-
-      if(operation === '÷'){
-        calc = +firstNumber / +secondNumber;
-      }
-
-      var lastOperation = actual.slice(-1);
-
-      return isOperation(lastOperation) ?
-        calc + lastOperation :
-        calc.toString();
-
     })
-
-    values.value = calculationResult;
+    $display.value = result
   }
 
-  function isOperation(char) {
-    return char === '+' || char === '-' || char === 'x' || char === '÷';
+  function removeLastOp(values){
+    lastCharRegex.test(values) ? values = values.slice(0,-1) : ''
   }
+
 
 })(window, document)
