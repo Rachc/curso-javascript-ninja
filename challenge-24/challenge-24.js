@@ -1,4 +1,4 @@
-(function(win, doc){
+(function(doc){
   'use strict'
   /*
   Vamos desenvolver mais um projeto. A ideia é fazer uma mini-calculadora.
@@ -39,53 +39,45 @@
   var $clearBtn = doc.querySelector('[data-js="clear"]')
   var $equalBtn = doc.querySelector('[data-js="result"]')
 
+  var displayValue = $display.value
+
   var operationsArr = ['+', '-', 'x', '÷']
   var lastCharRegex = new RegExp('\\D$')
 
   $numberBtn.forEach(function(item){
-    item.addEventListener('click', function(){
-      printItem(item)
-    }, false)
+    item.addEventListener('click', printNumber , false)
   })
 
   $operatorBtn.forEach(function(item){
-    item.addEventListener('click', function(e){
-      e.preventDefault
-      printItem(item)
-    }, false)
+    item.addEventListener('click', printOperator, false)
   })
 
-  $clearBtn.addEventListener('click', function(e){
-    e.preventDefault
-    clear($display)
-  },false)
+  $clearBtn.addEventListener('click', clearDisplay, false)
 
-  $equalBtn.addEventListener('click', function(e){
-    handleResult($display.value)
-  }, false)
+  $equalBtn.addEventListener('click', handleResult, false)
 
-  function printItem(item){
-    if (isLastItemOP($display.value) && (operationsArr.indexOf(item.value) !== -1))
-      return $display.value = $display.value.slice(0,-1) + item.value
-
-    return $display.value === '0' ? $display.value = item.value : $display.value += item.value
+  function printNumber(){
+    checkLeadingZero(this) ? $display.value = this.value : $display.value += this.value
   }
 
-  function isLastItemOP(values){
-    return lastCharRegex.test(values)
+  function printOperator(){
+    if (isLastItemOP($display.value) && (operationsArr.indexOf(this.value) !== -1))
+      return $display.value = $display.value.slice(0,-1) + this.value
+
+    checkLeadingZero(this) ? $display.value = 0 : $display.value += this.value
   }
 
-  function clear($display){
+  function clearDisplay(){
     $display.value = 0
   }
 
-  function handleResult(values){
-    lastCharRegex.test(values) ? values = values.slice(0,-1) : ''
+  function handleResult(){
+    var values = lastCharRegex.test(displayValue) ? displayValue.slice(0,-1) : $display.value
 
     values = values.match(/(?:\d+)[+x÷-]?/g);
 
     var result = values.reduce(function(acumulado, atual){
-      var op = lastCharRegex.test(acumulado) ? acumulado.split('').pop() : ''
+      var op = getOperator(acumulado)
       var nextOp = lastCharRegex.test(atual) ? atual.split('').pop() : ''
       var value1 = lastCharRegex.test(acumulado) ? acumulado.slice(0,-1) : acumulado
       var value2 = lastCharRegex.test(atual) ? atual.slice(0,-1) : atual
@@ -104,9 +96,21 @@
     $display.value = result
   }
 
-  function removeLastOp(values){
-    lastCharRegex.test(values) ? values = values.slice(0,-1) : ''
+  function checkLeadingZero(){
+    return $display.value === '0'
+  }
+
+  function isLastItemOP(values){
+    return lastCharRegex.test(values)
+  }
+
+  function getOperator(values){
+    return lastCharRegex.test(values) ? values.split('').pop() : ''
+  }
+
+  function getNumber(values){
+    return lastCharRegex.test(values) ? values.slice(0,-1) : values
   }
 
 
-})(window, document)
+})(document)
