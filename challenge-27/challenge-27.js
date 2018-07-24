@@ -95,5 +95,4 @@
   DOM.isNull = function isNull(param){
     return Object.prototype.toString.call(param) === '[object Null]' || Object.prototype.toString.call(param) === '[object Undefined]'
   }
-
 })(window, document)
