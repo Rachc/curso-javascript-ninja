@@ -69,30 +69,30 @@
     return Array.prototype.some.call(this.element, callback)
   }
 
-  DOM.isArray = function isArray(element){
+  DOM.prototype.isArray = function isArray(element){
     return Object.prototype.toString.call(element) === "[object Array]"
   }
 
-  DOM.isObject = function isObject(param) {
+  DOM.prototype.isObject = function isObject(param) {
     return Object.prototype.toString.call(param) === '[object Object]'
   }
 
-  DOM.isFunction = function isFunction(param){
+  DOM.prototype.isFunction = function isFunction(param){
     return Object.prototype.toString.call(param)==='[object Function]'
   }
 
-  DOM.isNumber =  function isNumber(param){
+  DOM.prototype.isNumber =  function isNumber(param){
     return Object.prototype.toString.call(param)==='[object Number]'
   }
 
-  DOM.isString = function isString(param){
+  DOM.prototype.isString = function isString(param){
     return Object.prototype.toString.call(param)==='[object String]'
   }
-  DOM.isBoolean =  function isBoolean(param){
+  DOM.prototype.isBoolean =  function isBoolean(param){
     return Object.prototype.toString.call(param)==='[object Boolean]'
   }
 
-  DOM.isNull = function isNull(param){
+  DOM.prototype.isNull = function isNull(param){
     return Object.prototype.toString.call(param) === '[object Null]' || Object.prototype.toString.call(param) === '[object Undefined]'
   }
 })(window, document)
