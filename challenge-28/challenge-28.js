@@ -1,3 +1,4 @@
+(function(win, doc){
   /*
   No HTML:
   - Crie um formulário com um input de texto que receberá um CEP e um botão
@@ -25,3 +26,151 @@
   - Utilize a lib DOM criada anteriormente para facilitar a manipulação e
   adicionar as informações em tela.
   */
+  DOM = function DOM(element){
+    this.element = doc.querySelectorAll(element)
+  }
+
+  DOM.prototype.on = function on(event, callback){
+    Array.prototype.forEach.call(this.element, function(element){
+      element.addEventListener(event, callback, false)
+    })
+  }
+
+  DOM.prototype.off = function off(event, callback){
+    Array.prototype.forEach.call(this.element, function(element){
+      element.removeEventListener(event, callback, false)
+    })
+  }
+
+  DOM.prototype.setValue = function value(appendedText){
+    Array.prototype.forEach.call(this.element, function(element){
+      var text = document.createTextNode(appendedText)
+      var fragment = document.createDocumentFragment()
+      fragment.appendChild(text)
+      element.appendChild(fragment)
+    })
+  }
+
+  DOM.prototype.removeValue = function value(){
+    Array.prototype.forEach.call(this.element, function(element){
+      if(element.hasChildNodes()) {
+        element.removeChild(element.firstChild)
+      }
+    })
+  }
+
+  DOM.prototype.get = function get(){
+    return this.element
+  }
+
+  DOM.prototype.forEach = function forEach(callback){
+    return Array.prototype.forEach.call(this.element, callback)
+  }
+
+  DOM.prototype.map = function map(callback){
+    return Array.prototype.map.call(this.element, callback)
+  }
+
+  DOM.prototype.filter = function filter(callback){
+    return Array.prototype.filter.call(this.element, callback)
+  }
+
+  DOM.prototype.reduce = function reduce(callback){
+    return Array.prototype.reduce.call(this.element, callback)
+  }
+
+  DOM.prototype.reduceRight = function reduceRight(callback){
+    return Array.prototype.reduceRight.call(this.element, callback)
+  }
+
+  DOM.prototype.every = function every(callback){
+    return Array.prototype.every.call(this.element, callback)
+  }
+
+  DOM.prototype.some = function some(callback){
+    return Array.prototype.some.call(this.element, callback)
+  }
+
+  DOM.prototype.isArray = function isArray(element){
+    return Object.prototype.toString.call(element) === "[object Array]"
+  }
+
+  DOM.prototype.isObject = function isObject(param) {
+    return Object.prototype.toString.call(param) === '[object Object]'
+  }
+
+  DOM.prototype.isFunction = function isFunction(param){
+    return Object.prototype.toString.call(param)==='[object Function]'
+  }
+
+  DOM.prototype.isNumber =  function isNumber(param){
+    return Object.prototype.toString.call(param)==='[object Number]'
+  }
+
+  DOM.prototype.isString = function isString(param){
+    return Object.prototype.toString.call(param)==='[object String]'
+  }
+  DOM.prototype.isBoolean =  function isBoolean(param){
+    return Object.prototype.toString.call(param)==='[object Boolean]'
+  }
+
+  DOM.prototype.isNull = function isNull(param){
+    return Object.prototype.toString.call(param) === '[object Null]' || Object.prototype.toString.call(param) === '[object Undefined]'
+  }
+
+  var ajax = new XMLHttpRequest()
+  var url = 'https://viacep.com.br/ws/03053010/json/'
+
+  var $logradouro = new DOM('[data-js=logradouro]')
+  var $bairro = new DOM('[data-js=bairro]')
+  var $estado = new DOM('[data-js=estado]')
+  var $cidade = new DOM('[data-js=cidade]')
+  var $cep = new DOM('[data-js=cep]')
+  var $submitBtn = new DOM('[data-js=submitBtn]')
+  var $cepInput = doc.querySelector('[data-js=CEPInput]')
+  var cepurl
+
+  function isRequisitionReady(){
+    return (ajax.readyState === 4 && ajax.status === 200)
+  }
+
+  $submitBtn.on('click', function(e){
+    e.preventDefault()
+    cleanValues()
+    cepurl = cleanCEP()
+    url = 'https://viacep.com.br/ws/' + cepurl + '/json/'
+    getCEP()
+  },false)
+
+  var cleanCEP = function cleanCEP(){
+    var regexCleaner = /\D/g
+    return $cepInput.value.replace(regexCleaner, '')
+  }
+
+  var getCEP = function getCEP(){
+    ajax.open('GET', url)
+    ajax.send()
+    
+    ajax.onreadystatechange =  function(){
+      if(isRequisitionReady()){
+        data = JSON.parse(ajax.responseText)
+        $logradouro.setValue(data.logradouro)
+        $bairro.setValue(data.bairro)
+        $estado.setValue(data.uf)
+        $cidade.setValue(data.localidade)
+        $cep.setValue(data.cep)
+      } else {
+        cleanValues()
+      }
+    }
+  }
+
+  var cleanValues = function cleanValues(){
+    $logradouro.removeValue()
+    $bairro.removeValue()
+    $estado.removeValue()
+    $cidade.removeValue()
+    $cep.removeValue()
+  }
+
+})(window, document)
