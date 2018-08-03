@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  img{
+    max-width: 350px;
+    height: auto;
+  }
+</style>
+<body>
+  <h1 data-js="companyName"></h1>
+  <h3 data-js="companyNumber"></h3>
+
+  <form action="">
+    <label for="image">Imagem</label>
+    <input type="url" name="image" id="inputImage" data-js="inputImage"><br>
+    <label for="brand">Marca/Modelo</label>
+    <input type="text" name="brand" id="inputBrand" data-js="inputBrand"><br>
+    <label for="year">Year</label>
+    <input type="text" name="year" id="inputYear" data-js="inputYear"><br>
+    <label for="plate">Placa</label>
+    <input type="text" name="plate" id="inputPlate" data-js="inputPlate"><br>
+    <label for="color">Cor</label>
+    <input type="text" name="color" id="inputColor" data-js="inputColor"><br>
+    <button type="submit" data-js="registerBtn">Cadastrar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="img">Imagem</th>
+        <th>Marca/Modelo</th>
+        <th>Ano</th>
+        <th>Placa</th>
+        <th>Cor</th>
+      </tr>
+    </thead>
+    <tbody data-js="content">
+
+    </tbody>
+  </table>
+
+  <script src="DOM.js"></script>
+  <script src="challenge-29.js"></script>
+</body>
+</html>
